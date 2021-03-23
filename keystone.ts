@@ -1,14 +1,15 @@
-import "dotenv/config";
-import { config, createSchema } from "@keystone-next/keystone/schema";
-import { createAuth } from "@keystone-next/auth";
+import 'dotenv/config';
+import { config, createSchema } from '@keystone-next/keystone/schema';
+import { createAuth } from '@keystone-next/auth';
 import {
   withItemData,
   statelessSessions,
-} from "@keystone-next/keystone/session";
-import { User } from "./schemas/User";
+} from '@keystone-next/keystone/session';
+import { User } from './schemas/User';
+import { Product } from './schemas/Product';
 
 const databaseUrl =
-  process.env.DATABASE_URL || "mongodb://localhost/keystone-sick-fits-tutorial";
+  process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
 
 const sessionConfig = {
   maxAge: 60 * 60 * 14 * 369,
@@ -16,18 +17,17 @@ const sessionConfig = {
 };
 
 const { withAuth } = createAuth({
-  listKey: "User",
-  identityField: "email",
-  secretField: "password",
+  listKey: 'User',
+  identityField: 'email',
+  secretField: 'password',
   initFirstItem: {
-    fields: ["name", "email", "password"],
+    fields: ['name', 'email', 'password'],
     // TODO: Add in initial roles here
   },
 });
 
 export default withAuth(
   config({
-    // @ts-ignore
     server: {
       cors: {
         origin: [process.env.FRONTEND_URL],
@@ -35,20 +35,22 @@ export default withAuth(
       },
     },
     db: {
-      adapter: "mongoose",
+      adapter: 'mongoose',
       url: databaseUrl,
       // TODO: Add data sending here
     },
     lists: createSchema({
       User,
+      Product,
     }),
     ui: {
       // Show the UI only for people who pass this test
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       isAccessAllowed: ({ session }) => !!session?.data,
     },
     session: withItemData(statelessSessions(sessionConfig), {
       // GraphQL Query
-      User: `id name email`,
+      User: 'id name email',
     }),
   })
 );

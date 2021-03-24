@@ -8,12 +8,6 @@
     "dev": "keystone-next",
     "seed-data": "keystone-next --seed-data"
   },
-  "eslintConfig": {
-    "extends": "wesbos/typescript.js",
-    "rules": {
-      "@typescript-eslint/no-unsafe-assignment": 0
-    }
-  },
   "babel": {
     "presets": [
       [

@@ -7,7 +7,7 @@
   },
   "editor.formatOnSave": true,
   "[javascript]": {
-    "editor.formatOnSave": false
+    "editor.formatOnSave": true
   },
   "[javascriptreact]": {
     "editor.formatOnSave": false
@@ -15,6 +15,6 @@
   "eslint.alwaysShowStatus": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": true
-  },
-  "prettier.disableLanguages": ["javascript", "javascriptreact"]
+  }
+  // "prettier.disableLanguages": ["javascript", "javascriptreact"]
 }
